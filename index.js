@@ -39,8 +39,10 @@ app.get('/', (req, res) => {
     // tasks list data from file
     readFile('./tasks.json')
     .then(tasks => {
-        console.log(tasks)
-        res.render('index', {tasks: tasks})
+        res.render('index', {
+            tasks: tasks,
+            error: null
+        })
     })
 })
 
@@ -48,18 +50,30 @@ app.get('/', (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/', (req, res) => {
+    // control data from form
+    let error = null
+    if(req.body.task.trim().length == 0){
+        error = 'Please insert correct task data'
+        readFile('./tasks.json')
+        .then(tasks => {
+            res.render('index', {
+            tasks: tasks,
+            error: error
+        })
+     })
+    } else {
     // tasks list data from file
     readFile('./tasks.json')
         .then(tasks => {
             // add new task
             //create new id automatically
-            let index 
-            if(tasks.length === 0)
-            {
+            let index
+            if(tasks.length === 0) 
+           {
                 index = 0
-            } else {
-                index = tasks[tasks.length-1].id + 1; 
-            }
+           } else {
+            index = tasks[tasks.length-1].id + 1; 
+           } 
             // crete task object
             const newTask = {
                 "id" : index,
@@ -73,6 +87,7 @@ app.post('/', (req, res) => {
             //redirect to / to see result
             res.redirect('/')
         })
+   } 
 })
 
 app.get('/delete-task/:taskId', (req, res) => {
