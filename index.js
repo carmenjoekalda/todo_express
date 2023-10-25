@@ -79,11 +79,17 @@ app.get('/delete-task/:taskId', (req, res) => {
     let deletedTaskId = parseInt(req.params.taskId)
     readFile('./tasks.json')
     .then(tasks => {
-        tasks.forEach((task, index) => {
-            if(task.id === deletedTaskId){
-                tasks.splice(index, 1)
-            } 
-        })
+        if (deletedTaskId = "all"){
+            tasks.forEach((task) => {
+                tasks.splice(task)
+            })
+        } else {
+            tasks.forEach((task, index) => {
+                if(task.id === deletedTaskId){
+                    tasks.splice(index, 1)
+                } 
+            })
+        }
         data = JSON.stringify(tasks, null, 2)
         writeFile('tasks.json', data)
         //redirect to / to see result
