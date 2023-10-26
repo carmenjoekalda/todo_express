@@ -1,56 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>ToDo list</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container">
-            <!--Page content goes here-->
-            <div class="row">
-                <div class="col s12">
-                  <div class="card">
+
+<head>
+    <title>ToDo list</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!--Page content goes here-->
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
                     <div class="card-content">
-                        <% if(error !== null){ %>
-                        <div class="row teal lighten-4">
-                            <div class="col s12">
-                                <p class="center-align"><%= error %></p>
-                            </div>
-                        </div>
-                        <% } %>  
-                      <span class="card-title">ToDo List</span>
-                      <div class="row">
-                        <form class="col s12" method="post" action="/">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input placeholder="Taks" id="task" type="text" name="task">
-                                    <label for="task">Insert Task</label>
+                        <% if(error !==null){ %>
+                            <div class="row teal lighten-4">
+                                <div class="col s12">
+                                    <p class="center-align">
+                                        <%= error %>
+                                    </p>
                                 </div>
                             </div>
-                            <input class="btn" type="submit" value="Add task">
-                        </form>
-                      </div>
+                            <% } %>
+                                <span class="card-title">ToDo List</span>
+                                <div class="row">
+                                    <form class="col s12" method="post" action="/">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input placeholder="Taks" id="task" type="text" name="task">
+                                                <label for="task">Insert Task</label>
+                                            </div>
+                                        </div>
+                                        <input class="btn" type="submit" value="Add task">
+                                    </form>
+                                </div>
                     </div>
                     <div class="card-action">
                         <ul class="collection">
                             <% console.log(tasks) %>
-                            <% tasks.forEach((task) => { %>
-                                <li class="collection-item"><%= task.task %>
-                                <a href="delete-task/<%= task.id %>" class="secondary-content"><i class="material-icons">flight_land</i><i class="material-icons">battery_full</i><i class="material-icons">battery_full</i></a>
-                                </li>
-                                <% }) %>
-                          </ul>
-                          <a class="btn" href="delete-task/all">CLEAR ALL</a>
+                                <% tasks.forEach((task)=> { %>
+                                    <li class="collection-item">
+                                        <%= task.task %>
+                                            <a href="delete-task/<%= task.id %>" class="secondary-content"><i
+                                                    class="material-icons">flight_land</i><i
+                                                    class="material-icons">battery_full</i><i
+                                                    class="material-icons">battery_full</i></a>
+                                    </li>
+                                    <% }) %>
+                        </ul>
+                        <a class="btn" href="delete-all">CLEAR ALL</a>
                     </div>
-                  </div>
                 </div>
             </div>
         </div>
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    </body>
+    </div>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
 </html>
